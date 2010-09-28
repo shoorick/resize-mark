@@ -14,6 +14,14 @@ L<http://shoorick.ru/>
 
 use Image::ExifTool ':Public';
 
+my $font_name_normal = 'DejaVu-Sans-Condensed';
+my $font_name_bold   = 'DejaVu-Sans-Bold';
+my $uname = `uname -a`;
+if ( $uname =~ /Ubuntu/ ) {
+    $font_name_normal = 'DejaVuSansC';
+    $font_name_bold   = 'DejaVuSansB';
+}
+
 foreach my $file ( @ARGV ) {
     my $info = ImageInfo($file, 'CreateDate');
     my $date = $$info{'CreateDate'};
@@ -22,16 +30,8 @@ foreach my $file ( @ARGV ) {
 
     $date =~ s/^(\d{4}):(\d{2}):(\d{2}).*/$3.$2.$1/;
 
-    my $font_name_normal = 'DejaVu-Sans-Condensed';
-    my $font_name_bold   = 'DejaVu-Sans-Bold';
-    my $uname = `uname -a`;
-    if ( $uname =~ /Ubuntu/ ) {
-        $font_name_normal = 'DejaVuSansC';
-        $font_name_bold   = 'DejaVuSansB';
-    }
-
     my $command = "convert $file "
-        . '-auto-orient -gravity SouthWest -rotate 90 -resize 1500x1500 '
+        . '-auto-orient -gravity SouthWest -resize 1500x1500 -rotate 90 '
         . "-font $font_name_normal  -pointsize 12 "
         . '-fill "#fff2" -annotate +5+5 "Alexander Sapozhnikov" '
         . qq{-annotate +222+5 "$date" }
