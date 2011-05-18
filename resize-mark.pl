@@ -3,7 +3,7 @@ use strict;
 
 =head1 DESCRIPTION
 
-Make small pictures from big ones
+Make small pictures from big ones.
 
 =head1 USAGE
 
@@ -18,7 +18,9 @@ Make small pictures from big ones
 
 =head2 Arguments
 
-C<color> – valid ImageMagick color: english word (C<white>, C<black> etc) or digital value (C<#RGB>, C<#RGBA>, C<#RRGGBB>, C<#RRGGBBAA>). Default value is C<#fff2> (⅞ transparent white).
+C<color> – valid ImageMagick color: english word (C<white>, C<black> etc)
+or digital value (C<#RGB>, C<#RGBA>, C<#RRGGBB>, C<#RRGGBBAA>).
+Default value is C<#fff2> (⅞ transparent white).
 
 C<gap> – gap between text chunks in pixels. Default value is C<10>.
 
