@@ -5,6 +5,27 @@ use strict;
 
 Make small pictures from big ones
 
+=head1 USAGE
+
+    resize-mark.pl
+        [ --color=text_color ]
+        [ --gap=gap_between_text_chunks ]
+        [ --name=author_name ]
+        [ --prefix=small_pictures_filenames_prefix ]
+        [ --site=site_of_author ]
+        [ --size=size_of_small_pictures ]
+        files
+
+=head2 Arguments
+
+C<color> – valid ImageMagick color: english word (C<white>, C<black> etc) or digital value (C<#RGB>, C<#RGBA>, C<#RRGGBB>, C<#RRGGBBAA>). Default value is C<#fff2> (⅞ transparent white).
+
+C<gap> – gap between text chunks in pixels. Default value is C<10>.
+
+C<prefix> – small pictures filenames prefix, default value is C<small.>
+
+C<name> – name of author, default value is name of current user.
+
 =cut
 
 use Image::ExifTool ':Public';
@@ -132,5 +153,9 @@ foreach my $file ( @ARGV ) {
 Alexander Sapozhnikov
 L<< http://shoorick.ru/ >>
 shoorick@cpan.org
+
+=head1 SEE ALSO
+
+L<< https://gist.github.com/gists/600484 >>
 
 =cut
