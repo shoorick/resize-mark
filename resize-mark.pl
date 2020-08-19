@@ -12,6 +12,7 @@ Make small pictures from big ones.
         [ --gap=gap_between_text_chunks ]
         [ --name=author_name ]
         [ --prefix=small_pictures_filenames_prefix ]
+        [ --quality=JPEG_quality ]
         [ --site=site_of_author ]
         [ --size=size_of_small_pictures ]
         files
@@ -24,9 +25,12 @@ Default value is C<#fff2> (⅞ transparent white).
 
 C<gap> – gap between text chunks in pixels. Default value is C<10>.
 
+C<name> – name of author, default value is name of current user.
+
 C<prefix> – small pictures filenames prefix, default value is C<small.>
 
-C<name> – name of author, default value is name of current user.
+C<quality>  – JPEG quality — integer. Recommended value is 80.
+
 
 =cut
 
@@ -67,6 +71,7 @@ my $prefix = 'small.';
 my $site   = 'shoorick.ru';
 my $size   = '50%';
 my $pointsize = 12;
+my $quality;
 
 
 # Override with options
@@ -78,6 +83,7 @@ GetOptions(
     'site:s'    => \$site,
     'size:s'    => \$size,
     'pointsize:s'    => \$pointsize,
+    'quality:i' => \$quality,
 );
 
 
@@ -163,6 +169,9 @@ foreach my $file ( @ARGV ) {
         'radius' => 1,
         'sigma'  => 2,
     );
+
+    $p->Set( 'quality' => int $quality )
+        if $quality;
     $p->Write($new_file_name);
 
     print "$file - $date\n";
