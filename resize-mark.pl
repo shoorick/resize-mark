@@ -1,6 +1,8 @@
 #!/usr/bin/perl -w
 use strict;
 
+=encoding utf-8
+
 =head1 DESCRIPTION
 
 Make small pictures from big ones.
@@ -50,8 +52,9 @@ L<< https://github.com/shoorick/resize-mark >>
 
 use Image::ExifTool ':Public';
 use Image::Magick;
+use File::Path qw( make_path );
 use Getopt::Long;
-use File::Path 'make_path';
+use Pod::Usage qw( pod2usage );
 
 # Constants
 my %preferred_fonts = (
@@ -78,6 +81,11 @@ my %preferred_fonts = (
     ) ], 
 );
 
+map { $_ = '' } my (
+    $need_help, $need_manual, $verbose,
+);
+
+# Default values
 my $color  = '#fff2';
 my $gap    = 10;
 my $name   = (getpwuid $>)[6];
@@ -88,9 +96,12 @@ my $size   = '50%';
 my $pointsize = 12;
 my $quality;
 
-
 # Override with options
 GetOptions(
+    'help|?'    => \$need_help,
+    'manual'    => \$need_manual,
+    'verbose'   => \$verbose,
+
     'color:s'   => \$color,
     'gap:i'     => \$gap,
     'name:s'    => \$name,
@@ -101,6 +112,12 @@ GetOptions(
     'quality:i' => \$quality,
 );
 
+pod2usage('verbose' => 2)
+    if $need_manual;
+# print help message when required arguments are omitted
+pod2usage(1)
+    if $need_help
+    || !@ARGV;
 
 # Try to find suitable fonts
 my $image = new Image::Magick;
