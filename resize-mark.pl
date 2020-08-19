@@ -29,8 +29,18 @@ C<name> – name of author, default value is name of current user.
 
 C<prefix> – small pictures filenames prefix, default value is C<small.>
 
-C<quality>  – JPEG quality — integer. Recommended value is 80.
+C<quality> – JPEG quality — integer. Recommended value is C<80>.
 
+=head1 AUTHOR
+
+Alexander Sapozhnikov
+L<< http://shoorick.ru/ >>
+L<< E<lt>shoorick@cpan.orgE<gt> >>
+
+=head1 LICENSE
+
+This program is free software, you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
