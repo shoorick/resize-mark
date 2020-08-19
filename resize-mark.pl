@@ -37,6 +37,7 @@ C<quality>  – JPEG quality — integer. Recommended value is 80.
 use Image::ExifTool ':Public';
 use Image::Magick;
 use Getopt::Long;
+use File::Path 'make_path';
 
 # Constants
 my %preferred_fonts = (
@@ -100,6 +101,12 @@ while ( my ( $scope, $list ) = each %preferred_fonts ) {
             if $seen{$_};
     } # foreach
 } # while
+
+# Prefix contains slash and path doesn't exist
+if ($prefix =~ m<^(.+)/[^/]*$> && ! -d $1) {
+    print "Create directory $1...\n";
+    make_path($1);
+}
 
 
 foreach my $file ( @ARGV ) {
