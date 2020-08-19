@@ -111,6 +111,7 @@ foreach my $file ( @ARGV ) {
     $date =~ s/^(\d{4}):(\d{2}):(\d{2}).*/$3.$2.$1/;
 
     my $p = new Image::Magick or next;
+    my $rv;
     $p->Read( $file );
     $p->AutoOrient;
     $p->Resize(
@@ -127,7 +128,7 @@ foreach my $file ( @ARGV ) {
     );
 
 
-    $p->Annotate(
+    $rv = $p->Annotate(
         'font'          => $fonts{'name'},
         'text'          => $name,
         'rotate'        => -90,
@@ -142,7 +143,7 @@ foreach my $file ( @ARGV ) {
         )
     )[4] + $gap;
 
-    $p->Annotate(
+    $rv = $p->Annotate(
         'font'          => $fonts{'site'},
         'text'          => $site,
         'rotate'        => -90,
@@ -157,7 +158,7 @@ foreach my $file ( @ARGV ) {
         )
     )[4] + $gap;
 
-    $p->Annotate(
+    $rv = $p->Annotate(
         'font'          => $fonts{'date'},
         'text'          => $date,
         'rotate'        => -90,
@@ -165,7 +166,7 @@ foreach my $file ( @ARGV ) {
         'y'             => $y,
     );
 
-    $p->Sharpen(
+    $rv = $p->Sharpen(
         'radius' => 1,
         'sigma'  => 2,
     );
