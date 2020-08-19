@@ -36,9 +36,9 @@ use Getopt::Long;
 
 # Constants
 my %preferred_fonts = (
-    'date' => [ qw/ DejaVuSans  DejaVu-Sans Bitstream-Vera-Sans BitstreamVeraSans Verdana / ], # Normal width
-    'name' => [ qw/ DejaVuSansC DejaVu-Sans-Condensed Tahoma / ], # Narrow
-    'site' => [ qw/ DejaVuSansB BitstreamVeraSansB VerdanaB TahomaB / ], # Bold
+    'date' => [ qw/ Open-Sans  DejaVuSans  DejaVu-Sans DejaVu-Sans-Book Bitstream-Vera-Sans BitstreamVeraSans Verdana / ], # Normal width
+    'name' => [ qw/ Open-Sans-Condenced-Light  DejaVuSansC DejaVu-Sans-Condensed Tahoma / ], # Narrow
+    'site' => [ qw/ Open-Sans-Bold  DejaVuSansB DejaVu-Sans-Bold BitstreamVeraSansB VerdanaB TahomaB / ], # Bold
 );
 
 my $color  = '#fff2';
@@ -48,6 +48,7 @@ my $name   = (getpwuid $>)[6];
 my $prefix = 'small.';
 my $site   = 'shoorick.ru';
 my $size   = '50%';
+my $pointsize = 12;
 
 
 # Override with options
@@ -58,6 +59,7 @@ GetOptions(
     'prefix:s'  => \$prefix,
     'site:s'    => \$site,
     'size:s'    => \$size,
+    'pointsize:s'    => \$pointsize,
 );
 
 
@@ -96,7 +98,7 @@ foreach my $file ( @ARGV ) {
     my ( $x, $y ) = ( $width - $gap, $height - $gap );
 
     $p->Set(
-        'pointsize'     => 12,
+        'pointsize'     => $pointsize,
         'fill'          => $color,
     );
 
@@ -161,3 +163,4 @@ shoorick@cpan.org
 L<< https://gist.github.com/gists/600484 >>
 
 =cut
+
