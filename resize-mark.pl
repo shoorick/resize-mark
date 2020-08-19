@@ -36,9 +36,27 @@ use Getopt::Long;
 
 # Constants
 my %preferred_fonts = (
-    'date' => [ qw/ Open-Sans  DejaVuSans  DejaVu-Sans DejaVu-Sans-Book Bitstream-Vera-Sans BitstreamVeraSans Verdana / ], # Normal width
-    'name' => [ qw/ Open-Sans-Condenced-Light  DejaVuSansC DejaVu-Sans-Condensed Tahoma / ], # Narrow
-    'site' => [ qw/ Open-Sans-Bold  DejaVuSansB DejaVu-Sans-Bold BitstreamVeraSansB VerdanaB TahomaB / ], # Bold
+     # Normal width
+    'date' => [ qw(
+        Open-Sans
+        DejaVuSans  DejaVu-Sans DejaVu-Sans-Book
+        Bitstream-Vera-Sans BitstreamVeraSans
+        Verdana
+     ) ],
+    # Narrow
+    'name' => [ qw(
+        Open-Sans-Condenced-Light
+        DejaVuSansC DejaVu-Sans-Condensed
+        Tahoma
+    ) ],
+    # Narrow
+    'site' => [ qw(
+        Open-Sans-Bold
+        DejaVuSansB DejaVu-Sans-Bold
+        BitstreamVeraSansB
+        VerdanaB
+        TahomaB
+    ) ], 
 );
 
 my $color  = '#fff2';
