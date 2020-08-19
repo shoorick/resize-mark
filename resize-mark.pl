@@ -42,6 +42,10 @@ L<< E<lt>shoorick@cpan.orgE<gt> >>
 This program is free software, you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
+=head1 SEE ALSO
+
+L<< https://github.com/shoorick/resize-mark >>
+
 =cut
 
 use Image::ExifTool ':Public';
@@ -195,17 +199,4 @@ foreach my $file ( @ARGV ) {
     print "$file - $date\n";
 
 } # foreach
-
-
-=head1 AUTHOR
-
-Alexander Sapozhnikov
-L<< http://shoorick.ru/ >>
-shoorick@cpan.org
-
-=head1 SEE ALSO
-
-L<< https://gist.github.com/gists/600484 >>
-
-=cut
 
