@@ -166,9 +166,9 @@ foreach my $file ( @ARGV ) {
         'y'             => $y,
     );
 
-    $rv = $p->Sharpen(
-        'radius' => 1,
-        'sigma'  => 2,
+    $rv = $p->AdaptiveSharpen(
+        'radius' => 0.5,
+        'sigma'  => 0.5,
     );
 
     $p->Set( 'quality' => int $quality )
