@@ -52,6 +52,7 @@ L<< https://github.com/shoorick/resize-mark >>
 
 use Image::ExifTool ':Public';
 use Image::Magick;
+use File::Basename;
 use File::Path qw( make_path );
 use Getopt::Long;
 use Pod::Usage qw( pod2usage );
@@ -139,14 +140,28 @@ if ($prefix =~ m<^(.+)/[^/]*$> && ! -d $1) {
     make_path($1);
 }
 
+my @TAGS = qw( CreateDate DateCreated DateTimeCreated DateTimeOriginal );
 
 foreach my $file ( @ARGV ) {
-    my $info = ImageInfo($file, 'CreateDate');
-    my $date = $$info{'CreateDate'};
+    my $info = ImageInfo($file, @TAGS);
+    my $date;
+    $date //= $info->{ $_ } for @TAGS;
+
+    unless ( defined $date ) {
+        my $basename = basename $file;
+        my $digits   = substr($basename =~ s/\D+//gr, 0, 8);
+        
+        # When digits are similar to ISO date
+        $date
+            = $digits =~ /\d/ && $digits > 19700101 && $digits < 20991232
+            ? $digits
+            : '';
+    }
+    
+    $date =~ s/^(\d{4})\D*(\d{2})\D*(\d{2}).*/$3.$2.$1/;
+
     my $new_file_name = $file;
     $new_file_name =~ s{([^/]+)$}{$prefix$1};
-
-    $date =~ s/^(\d{4}):(\d{2}):(\d{2}).*/$3.$2.$1/;
 
     my $p = new Image::Magick or next;
     my $rv;
