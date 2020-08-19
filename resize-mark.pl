@@ -139,10 +139,11 @@ if ($prefix =~ m<^(.+)/[^/]*$> && ! -d $1) {
     make_path($1);
 }
 
+my @TAGS = qw( CreateDate DateTimeOriginal );
 
 foreach my $file ( @ARGV ) {
-    my $info = ImageInfo($file, 'CreateDate');
-    my $date = $$info{'CreateDate'};
+    my $info = ImageInfo($file, @TAGS);
+    my $date = $info->{ $TAGS[0] };
     my $new_file_name = $file;
     $new_file_name =~ s{([^/]+)$}{$prefix$1};
 
