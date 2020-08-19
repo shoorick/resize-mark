@@ -152,14 +152,16 @@ foreach my $file ( @ARGV ) {
         my $digits   = substr($basename =~ s/\D+//gr, 0, 8);
         
         # When digits are similar to ISO date
-        $date = $digits
-            if  $digits > 19700101 && $digits < 20991232
+        $date
+            = $digits =~ /\d/ && $digits > 19700101 && $digits < 20991232
+            ? $digits
+            : '';
     }
     
+    $date =~ s/^(\d{4})\D*(\d{2})\D*(\d{2}).*/$3.$2.$1/;
+
     my $new_file_name = $file;
     $new_file_name =~ s{([^/]+)$}{$prefix$1};
-
-    $date =~ s/^(\d{4})\D*(\d{2})\D*(\d{2}).*/$3.$2.$1/;
 
     my $p = new Image::Magick or next;
     my $rv;
